@@ -12,8 +12,19 @@ class Brevet extends Model
     use HasFactory;
 
     /**
+     * La "liste blanche" des champs autorisés.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'agent_id',
+        'numero_brevet',
+        'date_delivrance',
+    ];
+
+
+    /**
      * RELATION : Un Brevet appartient à un seul Agent.
-     * C'est la partie "BelongsTo" de la relation OneToOne.
      */
     public function agent(): BelongsTo
     {
@@ -36,3 +47,4 @@ class Brevet extends Model
         return $this->hasMany(MentionLinguistique::class);
     }
 }
+

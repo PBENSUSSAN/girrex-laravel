@@ -12,6 +12,17 @@ class SaisieActivite extends Model
     use HasFactory;
 
     /**
+     * La liste des champs autorisés à être remplis massivement.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'vol_id',
+        'agent_id',
+        'role',
+    ];
+
+    /**
      * Indique à Laravel de traiter la colonne 'role' comme un Enum.
      */
     protected $casts = [
@@ -31,8 +42,6 @@ class SaisieActivite extends Model
      */
     public function agent(): BelongsTo
     {
-        // On doit spécifier la clé étrangère ('agent_id') et la clé du propriétaire ('id_agent')
-        // car le modèle Agent utilise une clé primaire non standard.
         return $this->belongsTo(Agent::class, 'agent_id', 'id_agent');
     }
 }

@@ -1,7 +1,10 @@
 <?php
+
 namespace App\Enums;
 
-enum ModuleApp: string
+use Filament\Support\Contracts\HasLabel;
+
+enum ModuleApp: string implements HasLabel
 {
     case GENERAL = 'GENERAL';
     case PLANNING = 'PLANNING';
@@ -14,4 +17,9 @@ enum ModuleApp: string
     case CYBER = 'CYBER';
     case SUIVI = 'SUIVI';
     case FEEDBACK = 'FEEDBACK';
+
+    public function getLabel(): ?string
+    {
+        return str_replace('_', ' ', $this->value);
+    }
 }

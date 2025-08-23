@@ -14,12 +14,26 @@ class Miso extends Model
     use HasFactory;
 
     /**
-     * Applique le casting automatique des Enums.
+     * Liste blanche pour l'affectation de masse.
+     */
+    protected $fillable = [
+        'responsable_id',
+        'centre_id',
+        'date_debut',
+        'date_fin',
+        'type_maintenance',
+        'description',
+        'piece_jointe',
+        'statut_override',
+    ];
+
+    /**
+     * Applique le casting automatique des Enums et des dates.
      */
     protected $casts = [
         'type_maintenance' => TypeMaintenance::class,
         'statut_override' => StatutMiso::class,
-        'date_debut' => 'datetime', // Indique que ces champs sont des objets date/heure
+        'date_debut' => 'datetime',
         'date_fin' => 'datetime',
     ];
 
@@ -47,3 +61,4 @@ class Miso extends Model
         return $this->hasMany(Historique::class);
     }
 }
+

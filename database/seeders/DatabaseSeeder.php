@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             CentreSeeder::class,
-             AgentSeeder::class,
+            AgentSeeder::class,
+            VolSeeder::class,
         ]);
     }
 }

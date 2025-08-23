@@ -1,8 +1,15 @@
 <?php
+
 namespace App\Enums;
 
-enum StatutMiso: string
+use Filament\Support\Contracts\HasLabel;
+
+enum StatutMiso: string implements HasLabel
 {
     case ANNULE = 'ANNULE';
-    // Les autres statuts ne sont pas stockés
+
+    public function getLabel(): ?string
+    {
+        return $this->value;
+    }
 }

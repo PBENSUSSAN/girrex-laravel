@@ -10,9 +10,10 @@ class DocumentType extends Model
 {
     use HasFactory;
 
-    /**
-     * RELATION : Un type peut être associé à plusieurs documents.
-     */
+    protected $fillable = [
+        'nom',
+    ];
+
     public function documents(): HasMany
     {
         return $this->hasMany(Document::class);

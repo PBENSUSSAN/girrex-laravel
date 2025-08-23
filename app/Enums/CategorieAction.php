@@ -1,7 +1,10 @@
 <?php
+
 namespace App\Enums;
 
-enum CategorieAction: string
+use Filament\Support\Contracts\HasLabel;
+
+enum CategorieAction: string implements HasLabel
 {
     case FONCTIONNEMENT = 'FONCTIONNEMENT';
     case DIFFUSION_DOC = 'DIFFUSION_DOC';
@@ -17,4 +20,9 @@ enum CategorieAction: string
     case REMEDIATION_INCIDENT_CYBER = 'REMEDIATION_INCIDENT_CYBER';
     case FEEDBACK_UTILISATEUR = 'FEEDBACK_UTILISATEUR';
     case TRAITEMENT_FEEDBACK = 'TRAITEMENT_FEEDBACK';
+
+    public function getLabel(): ?string
+    {
+        return str_replace('_', ' ', $this->value);
+    }
 }

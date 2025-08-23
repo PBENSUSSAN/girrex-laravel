@@ -14,12 +14,30 @@ class PanneCentre extends Model
     use HasFactory;
 
     /**
+     * Liste blanche pour l'affectation de masse.
+     */
+    protected $fillable = [
+        'centre_id',
+        'auteur_agent_id',
+        'type_equipement',
+        'equipement_details',
+        'date_heure_debut',
+        'date_heure_fin',
+        'criticite',
+        'statut',
+        'notification_generale',
+        'description',
+    ];
+
+    /**
      * Applique le casting automatique des Enums.
      */
     protected $casts = [
         'type_equipement' => TypeEquipement::class,
         'criticite' => CriticitePanne::class,
         'statut' => StatutPanne::class,
+        'date_heure_debut' => 'datetime',
+        'date_heure_fin' => 'datetime',
     ];
 
     /**
