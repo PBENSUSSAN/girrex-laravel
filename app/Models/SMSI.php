@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute; // <-- Assurez-vous que cette ligne est bien présente
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,6 +25,19 @@ class SMSI extends Model
         'manuel_management_doc_id',
         'programme_surete_doc_id',
     ];
+
+    /**
+     * Crée un attribut virtuel 'nom' pour le modèle SMSI,
+     * qui retourne le nom du centre associé.
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function nom(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->centre?->nom, // Le '?' évite une erreur si le centre n'est pas trouvé
+        );
+    }
 
     public function centre(): BelongsTo
     {

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\SMSIResource\RelationManagers;
 use App\Filament\Resources\SMSIResource\Pages;
 use App\Models\Agent;
 use App\Models\Centre;
@@ -68,8 +69,9 @@ class SMSIResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            //
+    return [
+        RelationManagers\RisquesRelationManager::class,
+        RelationManagers\IncidentsRelationManager::class,
         ];
     }
 

@@ -10,6 +10,17 @@ class FormationReglementaire extends Model
 {
     use HasFactory;
 
+    protected $table = 'formation_reglementaires';
+
+    /**
+     * Les attributs qui peuvent être assignés en masse.
+     */
+    protected $fillable = [
+        'nom',
+        'slug',
+        'periodicite_ans',
+    ];
+
     /**
      * RELATION : Une formation du catalogue peut avoir plusieurs suivis.
      */

@@ -15,6 +15,11 @@ class CentreResource extends Resource
     protected static ?string $model = Centre::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
+    protected static ?string $navigationGroup = 'Core';
+    protected static ?int $navigationSort = 2;
+    protected static ?string $modelLabel = 'Centre';
+    protected static ?string $pluralModelLabel = 'Centres';
+
 
     public static function form(Form $form): Form
     {

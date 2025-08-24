@@ -11,6 +11,8 @@ class Brevet extends Model
 {
     use HasFactory;
 
+    protected $table = 'brevets'; // C'est une bonne pratique de toujours spécifier la table
+
     /**
      * La "liste blanche" des champs autorisés.
      *
@@ -22,6 +24,18 @@ class Brevet extends Model
         'date_delivrance',
     ];
 
+    /**
+     * Les attributs qui doivent être convertis.
+     */
+    protected $casts = [
+        'date_delivrance' => 'date',
+    ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | RELATIONS
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * RELATION : Un Brevet appartient à un seul Agent.
@@ -46,5 +60,20 @@ class Brevet extends Model
     {
         return $this->hasMany(MentionLinguistique::class);
     }
-}
 
+    /**
+     * RELATION : Un brevet peut avoir plusieurs suivis de formations réglementaires.
+     */
+    public function suivis(): HasMany
+    {
+        return $this->hasMany(SuiviFormationReglementaire::class, 'brevet_id');
+    }
+
+    /**
+     * RELATION : Un Brevet peut avoir plusieurs suivis de formations continues.
+     */
+    public function formationsContinues(): HasMany
+    {
+        return $this->hasMany(SuiviFormationContinue::class, 'brevet_id');
+    }
+}

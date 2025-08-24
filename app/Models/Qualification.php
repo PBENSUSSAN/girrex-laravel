@@ -13,13 +13,28 @@ class Qualification extends Model
 {
     use HasFactory;
 
+    protected $table = 'qualifications';
+
     /**
-     * Applique le casting automatique des Enums.
+     * Les attributs qui peuvent être assignés en masse.
+     */
+    protected $fillable = [
+        'brevet_id',
+        'centre_id',
+        'type_flux',
+        'type_qualification',
+        'date_obtention',
+        'statut',
+    ];
+
+    /**
+     * Applique le casting automatique des Enums et des dates.
      */
     protected $casts = [
         'type_flux' => TypeFlux::class,
         'type_qualification' => TypeQualification::class,
         'statut' => StatutQualification::class,
+        'date_obtention' => 'date', // Bonne pratique d'ajouter les dates ici
     ];
 
     /**

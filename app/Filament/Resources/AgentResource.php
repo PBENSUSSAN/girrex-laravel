@@ -19,6 +19,10 @@ class AgentResource extends Resource
     protected static ?string $model = Agent::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationGroup = 'Core';
+    protected static ?int $navigationSort = 1;
+    protected static ?string $modelLabel = 'Agent';
+    protected static ?string $pluralModelLabel = 'Agents';
 
     public static function form(Form $form): Form
     {
@@ -46,6 +50,7 @@ class AgentResource extends Resource
                     ->searchable()
                     ->required(),
                 Forms\Components\Select::make('type_agent')
+                    // Note: Il serait mieux d'utiliser un Enum ici `->options(TypeAgent::class)`
                     ->options([
                         'controleur' => 'Contrôleur',
                         'administratif' => 'Administratif',
@@ -81,6 +86,7 @@ class AgentResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(), // --- CORRECTION 2 : Ajout du bouton Voir ---
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -93,10 +99,8 @@ class AgentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\BrevetRelationManager::class,
-            RelationManagers\FormationsRelationManager::class,
-            RelationManagers\EvaluationsRelationManager::class,
-            RelationManagers\HabilitationsRelationManager::class,
+            // On s'assure que seul le manager du brevet est actif pour l'instant
+            RelationManagers\BrevetsRelationManager::class,
         ];
     }
 
@@ -105,7 +109,9 @@ class AgentResource extends Resource
         return [
             'index' => Pages\ListAgents::route('/'),
             'create' => Pages\CreateAgent::route('/create'),
-            'edit' => Pages\EditAgent::route('/{record:id_agent}/edit'),
+            // --- CORRECTION 3 : On simplifie la route car getRouteKeyName() est défini sur le modèle ---
+            'view' => Pages\ViewAgent::route('/{record}'), 
+            'edit' => Pages\EditAgent::route('/{record}/edit'),
         ];
     }
 }

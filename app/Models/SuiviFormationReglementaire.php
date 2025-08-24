@@ -10,6 +10,26 @@ class SuiviFormationReglementaire extends Model
 {
     use HasFactory;
 
+    protected $table = 'suivi_formation_reglementaires';
+
+    /**
+     * Les attributs qui peuvent être assignés en masse.
+     */
+    protected $fillable = [
+        'brevet_id',
+        'formation_id',
+        'date_realisation',
+        'date_echeance',
+    ];
+
+    /**
+     * Les attributs qui doivent être convertis.
+     */
+    protected $casts = [
+        'date_realisation' => 'date',
+        'date_echeance' => 'date',
+    ];
+
     /**
      * RELATION : Un suivi concerne un Brevet.
      */

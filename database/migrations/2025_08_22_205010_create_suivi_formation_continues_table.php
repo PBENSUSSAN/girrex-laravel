@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('suivi_formation_continues', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('agent_id')->constrained('agents', 'id_agent')->cascadeOnDelete();
+            $table->foreignId('brevet_id')->constrained('brevets')->cascadeOnDelete();
             $table->string('type_formation', 4);
             $table->date('date_realisation');
             $table->timestamps();
