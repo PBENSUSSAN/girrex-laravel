@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\FeedbackResource\Pages;
+use App\Filament\Resources\FeedbackResource\RelationManagers;
 use App\Models\Agent;
 use App\Models\Feedback;
 use Filament\Forms;
@@ -78,7 +79,7 @@ class FeedbackResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\ActionSuiviRelationManager::class,
         ];
     }
 

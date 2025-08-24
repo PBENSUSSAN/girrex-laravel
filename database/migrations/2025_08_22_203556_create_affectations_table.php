@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('affectations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('agent_id')->constrained('agents')->cascadeOnDelete();
+            // --- CORRECTION ICI ---
+            // On spécifie que la clé étrangère pointe vers la colonne 'id_agent'
+            $table->foreignId('agent_id')->constrained('agents', 'id_agent')->cascadeOnDelete();
+            
             $table->foreignId('centre_id')->constrained('centres')->cascadeOnDelete();
             $table->string('fonction', 255);
             $table->date('date_debut');

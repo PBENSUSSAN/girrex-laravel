@@ -13,8 +13,14 @@ return new class extends Migration
     {
         Schema::create('formations', function (Blueprint $table) {
             $table->integer('id_formation')->primary();
-            $table->foreignId('agent_id')->nullable()->constrained('agents')->cascadeOnDelete();
-            $table->foreignId('module_id')->nullable()->constrained('modules')->nullOnDelete();
+            $table->foreignId('agent_id')->nullable()->constrained('agents', 'id_agent')->cascadeOnDelete();
+
+            // --- CORRECTION ICI ---
+            // On déclare la colonne comme un simple integer (pas un foreignId)
+            $table->integer('module_id')->nullable();
+            // On déclare la contrainte manuellement
+            $table->foreign('module_id')->references('id_module')->on('modules')->nullOnDelete();
+
             $table->foreignId('organisme_id')->nullable()->constrained('organismes')->nullOnDelete();
             $table->date('date')->nullable();
             $table->integer('annee')->nullable();

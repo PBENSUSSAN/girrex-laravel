@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('habilitations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('agent_id')->constrained('agents')->cascadeOnDelete();
+            
+            // --- CORRECTION ICI ---
+            $table->foreignId('agent_id')->constrained('agents', 'id_agent')->cascadeOnDelete();
+
             $table->string('type_hab', 100);
             $table->date('date_obtention');
             $table->date('date_expiration')->nullable();

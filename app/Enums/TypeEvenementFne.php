@@ -1,9 +1,7 @@
 <?php
 namespace App\Enums;
-
-enum TypeEvenementFne: string
-{
-    case ATM = 'ATM';
-    case TECHNIQUE = 'TECHNIQUE';
-    case AUTRE = 'AUTRE';
+use Filament\Support\Contracts\HasLabel;
+enum TypeEvenementFne: string implements HasLabel {
+    case ATM = 'ATM'; case TECHNIQUE = 'TECHNIQUE'; case AUTRE = 'AUTRE';
+    public function getLabel(): ?string { return $this->value; }
 }

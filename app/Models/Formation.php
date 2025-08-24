@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Enums\ResultatChoix;
@@ -12,18 +13,33 @@ class Formation extends Model
 
     protected $primaryKey = 'id_formation';
     public $incrementing = false;
-    protected $casts = ['resultat' => ResultatChoix::class];
+
+    protected $fillable = [
+        'id_formation',
+        'agent_id',
+        'module_id',
+        'organisme_id',
+        'date',
+        'annee',
+        'duree',
+        'resultat',
+    ];
+
+    protected $casts = [
+        'resultat' => ResultatChoix::class,
+        'date' => 'date',
+    ];
 
     public function agent(): BelongsTo
     {
         return $this->belongsTo(Agent::class, 'agent_id', 'id_agent');
     }
-    
+
     public function module(): BelongsTo
     {
         return $this->belongsTo(Module::class, 'module_id', 'id_module');
     }
-    
+
     public function organisme(): BelongsTo
     {
         return $this->belongsTo(Organisme::class);

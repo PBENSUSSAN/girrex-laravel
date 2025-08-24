@@ -1,10 +1,7 @@
 <?php
 namespace App\Enums;
-
-enum StatutRecommendationQs: string
-{
-    case PROPOSEE = 'PROPOSEE';
-    case ACCEPTEE = 'ACCEPTEE';
-    case REFUSEE = 'REFUSEE';
-    case IMPLEMENTEE = 'IMPLEMENTEE';
+use Filament\Support\Contracts\HasLabel;
+enum StatutRecommendationQs: string implements HasLabel {
+    case PROPOSEE = 'PROPOSEE'; case ACCEPTEE = 'ACCEPTEE'; case REFUSEE = 'REFUSEE'; case IMPLEMENTEE = 'IMPLEMENTEE';
+    public function getLabel(): ?string { return $this->value; }
 }

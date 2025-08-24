@@ -12,9 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('licences', function (Blueprint $table) {
-            $table->id(); // On utilise une clé standard Laravel
+            $table->id();
             $table->integer('id_licence')->unique();
-            $table->foreignId('agent_id')->constrained('agents')->cascadeOnDelete();
+            
+            // --- CORRECTION ICI ---
+            $table->foreignId('agent_id')->constrained('agents', 'id_agent')->cascadeOnDelete();
+
             $table->string('num_licence', 50)->nullable();
             $table->string('type_licence', 100)->nullable();
             $table->date('date_delivrance')->nullable();
